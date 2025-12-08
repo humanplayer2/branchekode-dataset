@@ -205,3 +205,9 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+.streamlit/secrets.toml
+
+# pixi environments
+.pixi
+*.egg-info
+data_local
