@@ -74,7 +74,7 @@ def evaluate_case():
             <style>
                 /* multiselect container */
                 div[data-baseweb="select"] > div {
-                    width: 900px !important;
+                    width: 800px !important;
                 }
 
                 /* items in multiselect container */
