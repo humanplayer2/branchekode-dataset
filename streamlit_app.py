@@ -26,10 +26,6 @@ st.markdown("# :sparkles::sparkles: Gyldne Branchekoder :sparkles::sparkles:")
 # lav en expander så instruktioner blive skjult ved evalueringsstart, med kan vises senere:
 with st.expander("Vis instruktioner og startvalg", expanded=st.session_state.expander_expanded):
     st.markdown("""
-### Kom i gang
-1. Indtast udleveret brugernavn.
-2. Hvis du forsætter fra tidligere, så indtast den aktivitetsbeskrivelse du er nået til. Appen holder ikke pt. styr på det for dig, desværre.
-
 ### Opgaven
 Der vises en nummereret aktivitetsbeskrivelse samt en række forslag.  
 
@@ -40,7 +36,11 @@ Under er et felt til at vælge branchekoder.
 
 Når du er tilfreds, så `Gem og gå til næste`.
                 
-### Afslut
+### Kom i gang
+1. Indtast udleveret brugernavn.
+2. Hvis du forsætter fra tidligere, så indtast den aktivitetsbeskrivelse du er nået til. Appen holder ikke pt. styr på det for dig, desværre.
+                
+### Afslut / hold pause
 Notér nummeret over aktivitetsbeskrivelsen så du kan forsætte derfra næste gang.
 """)
 
