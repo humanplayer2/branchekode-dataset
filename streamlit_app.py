@@ -74,13 +74,11 @@ def evaluate_case():
             codes_with_titles,
            default=model_suggestion,
         )
-        st.write("Valgt(e):", user_selection)
-    
+            
         st.markdown("Du kan tilføje flere. Hvis du er tilfreds kan du gemme og forsætte. Eller du kan springe denne over og forsætte til næste.")
 
         with st.form("Gem?"):
             saved = st.form_submit_button("Gem og gå til næste")
-            skipped = st.form_submit_button("Gem ikke og gå til næste")
 
         if saved:
             now = datetime.datetime.now().strftime('%Y-%m-%dT%H-%M-%S')
@@ -95,23 +93,7 @@ def evaluate_case():
                 f.write(user_selection_csv)        
             st.session_state.case += 1
             st.write("Gemt! Vi er videre!")
-            st.rerun(scope="fragment")
-            
-        elif skipped:
-            now = datetime.datetime.now().strftime('%Y-%m-%dT%H-%M-%S')
-            user_selection_gcs_path = f"branchekode-selector-bucket/user_responses/{name}_{case}_{now}.csv"
-            user_selection_df = pd.DataFrame({
-                'case': [case],
-                'user_selection': ['skipped'],
-                'model_suggetion': [model_suggestion]
-                })
-            user_selection_csv = user_selection_df.to_csv(index=False).encode("utf-8")
-            with conn.open(user_selection_gcs_path, mode="wb") as f:
-                f.write(user_selection_csv)        
-            st.write("Gemt! vi er videre!")
-            st.session_state.case += 1
-            st.rerun(scope="fragment")
-            
+            st.rerun(scope="fragment")                        
     return
 
 evaluate_case()
