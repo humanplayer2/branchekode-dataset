@@ -94,7 +94,7 @@ def evaluate_case():
         # ---- Custom CSS end ----
 
         user_selection = st.multiselect(
-            "Hvilke(n) branchekode(r) passer? Med menuen rullet ned, kan man skrive for at filtrere. Prøv `10 fisk`",
+            "Hvilke(n) branchekode(r) passer? Med menuen rullet ned, kan man skrive for at filtrere. Prøv `10 fisk`.",
             codes_with_titles,
            default=model_suggestion,
         )
