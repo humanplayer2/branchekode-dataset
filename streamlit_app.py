@@ -73,7 +73,7 @@ def evaluate_case():
         st.markdown("""
             <style>
                 .stMultiSelect [data-baseweb=select] span{
-                    max-width: 500px;
+                    max-width: 800px;
                     font-size: 1rem;
                 }
             </style>
