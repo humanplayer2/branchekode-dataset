@@ -34,9 +34,9 @@ with st.expander("Vis instruktioner og startvalg", expanded=st.session_state.exp
 Der vises en nummereret aktivitetsbeskrivelse samt en række forslag.  
 
 Under er et felt til at vælge branchekoder.   
-    - Det indeholder forslag: Fjern de irrelevante.
-    - Feltet er både en (meget lang) drop-down menu, men også et *tekstsøgefelt*.
-    - Prøv at klikke efter forslagene og skriv f.eks. `10 fisk`.
+- Feltet indeholder forslag: Fjern de irrelevante på deres kryds.
+- Feltet er både en (meget lang) drop-down menu, men også et *tekstsøgefelt*.
+- Prøv at rulle menuen ned og indtast f.eks. `10 fisk`. :fish:
 
 Når du er tilfreds, så `Gem og gå til næste`.
                 
