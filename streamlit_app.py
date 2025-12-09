@@ -27,7 +27,7 @@ st.markdown("# :sparkles::sparkles: Gyldne Branchekoder :sparkles::sparkles:")
 with st.expander("Vis instruktioner og startvalg", expanded=st.session_state.expander_expanded):
     st.markdown("""
 ### Kom i gang
-1. Indtast udstukket brugernavn.
+1. Indtast udleveret brugernavn.
 2. Hvis du forsætter fra tidligere, så indtast den aktivitetsbeskrivelse du er nået til. Appen holder ikke pt. styr på det for dig, desværre.
 
 ### Opgaven
@@ -46,7 +46,7 @@ Notér nummeret over aktivitetsbeskrivelsen så du kan forsætte derfra næste g
 
     with st.form("user_info"):
         name = st.text_input("Bruger ID")
-        start = st.number_input(f"Start ved evalueringssag (1 -- {len(evalueringsdata)}):", min_value=1, max_value=5648, value=1)
+        start = st.number_input(f"Start ved aktivitetsbeskrivelse (1 -- {len(evalueringsdata)}):", min_value=1, max_value=5648, value=1)
         st.markdown("Noter gerne hvor langt du når til næste gang. Appen kan desværre ikke huske det.")
         started = st.form_submit_button("OK, jeg er klar.")
 
