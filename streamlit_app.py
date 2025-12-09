@@ -74,7 +74,7 @@ def evaluate_case():
         <style>
         /* Make the multiselect container wider */
         div[data-baseweb="select"] > div {
-            width: 500px !important;   /* adjust as needed */
+            width: 800px !important;   /* adjust as needed */
         }
 
         /* Ensure each option uses a full line */
