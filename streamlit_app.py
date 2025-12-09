@@ -75,12 +75,12 @@ def evaluate_case():
                 /* multiselect container */
                 div[data-baseweb="select"] > div {
                     width: 780px !important;
+                    height: 780px !important;
                 }
 
                 /* items in multiselect container */
                 .stMultiSelect [data-baseweb=select] span{
                     white-space: normal !important;  /* allows line breaks */
-                    width: 700px;
                     min-width: 95%;
                     max-width: 95%;
                     height: 2.4em;
@@ -90,7 +90,6 @@ def evaluate_case():
                     padding-bottom: 2px !important;
                     background-color: white;
                     color: black;
-                    radius: 10px;
                 }
             </style>
             """, unsafe_allow_html=True)
