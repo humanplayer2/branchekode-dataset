@@ -72,6 +72,11 @@ def evaluate_case():
         # ---- Custom CSS ----
         st.markdown("""
             <style>
+                /* Make the multiselect container wider */
+                div[data-baseweb="select"] > div {
+                    width: 1000px !important;
+                }
+                    
                 .stMultiSelect [data-baseweb=select] span{
                     max-width: 800px;
                     font-size: 1rem;
