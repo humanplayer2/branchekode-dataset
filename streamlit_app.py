@@ -77,14 +77,14 @@ def evaluate_case():
                     width: 780px !important;
                     max-height: 1600px !important;
                     overflow: auto;
-                    padding-bottom: 200px !important;
+                    padding-bottom: 40px !important;
                 }
 
                 /* items in multiselect container */
                 .stMultiSelect [data-baseweb=select] span{
                     white-space: normal !important;  /* allows line breaks */
-                    min-width: 90%;
-                    max-width: 90%;
+                    min-width: 100%;
+                    max-width: 100%;
                     height: 2.4em;
                     font-size: 1rem;
                     line-height: 1 !important;
