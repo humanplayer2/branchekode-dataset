@@ -74,13 +74,13 @@ def evaluate_case():
             <style>
                 /* multiselect container */
                 div[data-baseweb="select"] > div {
-                    width: 1200px !important;
+                    width: 1400px !important;
                 }
 
                 /* items in multiselect container */
                 .stMultiSelect [data-baseweb=select] span{
-                    min-width: 1100px;
-                    max-width: 1100px;
+                    min-width: 1300px;
+                    max-width: 1300px;
                     font-size: 1rem;
                 }
             </style>
