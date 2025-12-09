@@ -75,7 +75,7 @@ def evaluate_case():
                 /* multiselect container */
                 div[data-baseweb="select"] > div {
                     width: 780px !important;
-                    max-height: 500px !important;
+                    max-height: 1600px !important;
                     overflow: auto;
                 }
 
