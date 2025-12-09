@@ -84,6 +84,7 @@ def evaluate_case():
                     max-width: 95%;
                     height: 3.2em;
                     font-size: 1rem;
+                    line-height: 1 !important;
                 }
             </style>
             """, unsafe_allow_html=True)
