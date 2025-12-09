@@ -69,6 +69,23 @@ def evaluate_case():
         st.markdown(f"#### {case}:")
         st.markdown(f"### {aktivitet}")
 
+        # ---- Custom CSS ----
+        st.markdown("""
+        <style>
+        /* Make the multiselect container wider */
+        div[data-baseweb="select"] > div {
+            width: 500px !important;   /* adjust as needed */
+        }
+
+        /* Ensure each option uses a full line */
+        div[data-baseweb="select"] span {
+            white-space: normal !important;  /* allows line breaks */
+        }
+
+        </style>
+        """, unsafe_allow_html=True)
+        # ---- Custom CSS end ----
+
         user_selection = st.multiselect(
             "Hvilke(n) branchekode(r) passer? Tilføj/Fjern. Skriv for at filtrere, f.eks. '90 sce'",
             codes_with_titles,
