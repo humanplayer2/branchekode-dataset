@@ -26,23 +26,23 @@ st.markdown("# :sparkles::sparkles: Gyldne Branchekoder :sparkles::sparkles:")
 # lav en expander så instruktioner blive skjult ved evalueringsstart, med kan vises senere:
 with st.expander("Vis instruktioner og startvalg", expanded=st.session_state.expander_expanded):
     st.markdown("""
-                ### Kom i gang
-                1. Indtast udstukket brugernavn.
-                2. Hvis du forsætter fra tidligere, så indtast den aktivitetsbeskrivelse du er nået til. Appen holder ikke pt. styr på det for dig, desværre.
+### Kom i gang
+1. Indtast udstukket brugernavn.
+2. Hvis du forsætter fra tidligere, så indtast den aktivitetsbeskrivelse du er nået til. Appen holder ikke pt. styr på det for dig, desværre.
+
+### Opgaven
+Der vises en nummereret aktivitetsbeskrivelse samt en række forslag.  
+
+Under er et felt til at vælge branchekoder.   
+    - Det indeholder forslag: Fjern de irrelevante.
+    - Feltet er både en (meget lang) drop-down menu, men også et *tekstsøgefelt*.
+    - Prøv at klikke efter forslagene og skriv f.eks. `10 fisk`.
+
+Når du er tilfreds, så `Gem og gå til næste`.
                 
-                ### Opgaven
-                Der vises en nummereret aktivitetsbeskrivelse samt en række forslag.  
-                
-                Under er et felt til at vælge branchekoder. 
-                    - Det indeholder forslag: Fjern de irrelevante.
-                    - Feltet er både en (meget lang) drop-down menu, men også et *tekstsøgefelt*.
-                    - Prøv at klikke efter forslagene og skriv f.eks. `10 fisk`.
-                
-                Når du er tilfreds, så `Gem og gå til næste`.
-                                
-                ### Afslut
-                Notér nummeret over aktivitetsbeskrivelsen så du kan forsætte derfra næste gang.
-    """)
+### Afslut
+Notér nummeret over aktivitetsbeskrivelsen så du kan forsætte derfra næste gang.
+""")
 
     with st.form("user_info"):
         name = st.text_input("Bruger ID")
@@ -87,7 +87,7 @@ def evaluate_case():
         # ---- Custom CSS end ----
 
         user_selection = st.multiselect(
-            "Hvilke(n) branchekode(r) passer? Tilføj/Fjern. Skriv for at filtrere, f.eks. '90 sce'",
+            "Hvilke(n) branchekode(r) passer? Tilføj/Fjern. Skriv for at filtrere, f.eks. '10 fisk'",
             codes_with_titles,
            default=model_suggestion,
         )
