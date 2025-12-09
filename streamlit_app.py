@@ -75,7 +75,6 @@ def evaluate_case():
                 /* multiselect container */
                 div[data-baseweb="select"] > div {
                     width: 1000px !important;
-                    height: 400px !important;
                 }
 
                 /* items in multiselect container */
@@ -83,7 +82,7 @@ def evaluate_case():
                     white-space: normal !important;  /* allows line breaks */
                     min-width: 900px;
                     max-width: 900px;
-                    height: 4em;
+                    /*height: 4em;*/
                     font-size: 1rem;
                 }
             </style>
