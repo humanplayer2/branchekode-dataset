@@ -69,22 +69,28 @@ def evaluate_case():
         st.markdown(f"#### {case}:")
         st.markdown(f"### {aktivitet}")
 
-        # ---- Custom CSS ----
         st.markdown("""
-            <style>
-                /* Make the multiselect container wider */
-                div[data-baseweb="select"] > div {
-                    width: 1000px !important;
-                }
-                    
-                .stMultiSelect [data-baseweb=select] span{
-                    max-width: 800px;
-                    font-size: 1rem;
-                }
-            </style>
-            """, unsafe_allow_html=True)
+        <style>
+        /* make the main select container wider */
+        div[data-baseweb="select"] > div {
+            width: 1000px !important;
+        }
 
-        # ---- Custom CSS end ----
+        /* selected item "chips" */
+        .stMultiSelect div[data-baseweb="tag"] {
+            display: block !important;      /* force each item onto its own line */
+            width: 100% !important;         /* take the full width */
+            margin-bottom: 4px !important;  /* optional: spacing between items */
+        }
+
+        /* text inside selected item chips */
+        .stMultiSelect div[data-baseweb="tag"] span {
+            max-width: 800px !important;
+            font-size: 1rem !important;
+            white-space: normal !important; /* allow wrapping inside long items */
+        }
+        </style>
+        """, unsafe_allow_html=True)
 
         user_selection = st.multiselect(
             "Hvilke(n) branchekode(r) passer? Tilføj/Fjern. Skriv for at filtrere, f.eks. '10 fisk'",
