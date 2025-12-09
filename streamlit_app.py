@@ -55,6 +55,7 @@ if started:
     st.session_state.started = True # vis evaluering
     st.session_state.case = start # sæt første evaluering til brugervalg
     st.session_state.expander_expanded = False # skjul instruktioner
+    st.balloons()
     st.rerun() # for at skjule expander ved knap-tryk
 
 # Evaluation loop. Genkører ved knap-tryk.
