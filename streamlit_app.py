@@ -89,7 +89,7 @@ def evaluate_case():
                     line-height: 1 !important;
                     padding-top: 2px !important;
                     padding-bottom: 2px !important;
-                    padding-right: 2px !important;
+                    padding-right: -10px !important;
                     background-color: white;
                     color: black;
                 }
