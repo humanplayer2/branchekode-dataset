@@ -26,22 +26,22 @@ st.markdown("# :sparkles::sparkles: Gyldne Branchekoder :sparkles::sparkles:")
 # lav en expander så instruktioner blive skjult ved evalueringsstart, med kan vises senere:
 with st.expander("Vis instruktioner og startvalg", expanded=st.session_state.expander_expanded):
     st.markdown("""
-                ### Start:
-                1. Indtast selvvalgt brugernavn. Genbrug det fra sidst.
-                2. Indtast den aktivitetsbeskrivelse du er nået til. Appen holder ikke pt. styr på det for dig, desværre.
+                ### Kom i gang
+                1. Indtast udstukket brugernavn.
+                2. Hvis du forsætter fra tidligere, så indtast den aktivitetsbeskrivelse du er nået til. Appen holder ikke pt. styr på det for dig, desværre.
                 
-                ### Evaluering:
+                ### Opgaven
                 Der vises en nummereret aktivitetsbeskrivelse samt en række forslag.  
-                Man kan klikke i feltet og skrive for at filtrere med kode eller tekst (f.eks. "10." eller "behandli").
-                1. Fjern forkerte forslag.
-                2. Tilføj rigtige forslag.
-                3. Gem.
-                4. Næste præsenteres.
                 
-                Du kan vælge at springe sag en over. 
+                Under er et felt til at vælge branchekoder. 
+                    - Det indeholder forslag: Fjern de irrelevante.
+                    - Feltet er både en (meget lang) drop-down menu, men også et *tekstsøgefelt*.
+                    - Prøv at klikke efter forslagene og skriv f.eks. `10 fisk`.
                 
-                ### Stop:
-                Du kan bare lukke fanen når du har gemt, men skriv gerne ned til næste gang hvilken sag du er nået til.
+                Når du er tilfreds, så `Gem og gå til næste`.
+                                
+                ### Afslut
+                Notér nummeret over aktivitetsbeskrivelsen så du kan forsætte derfra næste gang.
     """)
 
     with st.form("user_info"):
@@ -66,16 +66,14 @@ def evaluate_case():
         aktivitet = evalueringsdata["aktivitet"].iloc[case - 1]
         model_suggestion = ast.literal_eval(evalueringsdata["brancheforslag med titler"].iloc[case - 1])
     
-        st.markdown(f"## Aktivitetsbeskrivelse {case}:")
+        st.markdown(f"#### {case}:")
         st.markdown(f"### {aktivitet}")
 
         user_selection = st.multiselect(
-            "Hvilke(n) branchekode(r) passer?",
+            "Hvilke(n) branchekode(r) passer? Tilføj/Fjern. Skriv for at filtrere, f.eks. '90 sce'",
             codes_with_titles,
            default=model_suggestion,
         )
-            
-        st.markdown("Du kan tilføje flere. Hvis du er tilfreds kan du gemme og forsætte. Eller du kan springe denne over og forsætte til næste.")
 
         with st.form("Gem?"):
             saved = st.form_submit_button("Gem og gå til næste")
