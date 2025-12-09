@@ -1,0 +1,7 @@
+[theme]
+base="light"
+backgroundColor="white"
+secondaryBackgroundColor="lavender"
+codeBackgroundColor="powderBlue"
+textColor="black"
+baseRadius="full"

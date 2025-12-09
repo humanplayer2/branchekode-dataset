@@ -26,27 +26,27 @@ st.markdown("# :sparkles::sparkles: Gyldne Branchekoder :sparkles::sparkles:")
 # lav en expander så instruktioner blive skjult ved evalueringsstart, med kan vises senere:
 with st.expander("Vis instruktioner og startvalg", expanded=st.session_state.expander_expanded):
     st.markdown("""
-                ### Start:
-                1. Indtast selvvalgt brugernavn. Genbrug det fra sidst.
-                2. Indtast den aktivitetsbeskrivelse du er nået til. Appen holder ikke pt. styr på det for dig, desværre.
+### Opgaven
+Der vises en nummereret aktivitetsbeskrivelse samt en række forslag.  
+
+Under er et felt til at vælge branchekoder.   
+- Feltet indeholder forslag: Fjern de irrelevante på deres kryds.
+- Feltet er både en (meget lang) drop-down menu, men også et *tekstsøgefelt*.
+- Prøv at rulle menuen ned og indtast f.eks. `10 fisk`. :fish:
+
+Når du er tilfreds, så `Gem og gå til næste`.
                 
-                ### Evaluering:
-                Der vises en nummereret aktivitetsbeskrivelse samt en række forslag.  
-                Man kan klikke i feltet og skrive for at filtrere med kode eller tekst (f.eks. "10." eller "behandli").
-                1. Fjern forkerte forslag.
-                2. Tilføj rigtige forslag.
-                3. Gem.
-                4. Næste præsenteres.
+### Kom i gang
+1. Indtast udleveret brugernavn.
+2. Hvis du forsætter fra tidligere, så indtast den aktivitetsbeskrivelse du er nået til. Appen holder ikke pt. styr på det for dig, desværre.
                 
-                Du kan vælge at springe sag en over. 
-                
-                ### Stop:
-                Du kan bare lukke fanen når du har gemt, men skriv gerne ned til næste gang hvilken sag du er nået til.
-    """)
+### Afslut / hold pause
+Notér nummeret over aktivitetsbeskrivelsen så du kan forsætte derfra næste gang.
+""")
 
     with st.form("user_info"):
         name = st.text_input("Bruger ID")
-        start = st.number_input(f"Start ved evalueringssag (1 -- {len(evalueringsdata)}):", min_value=1, max_value=5648, value=1)
+        start = st.number_input(f"Start ved aktivitetsbeskrivelse (1 -- {len(evalueringsdata)}):", min_value=1, max_value=5648, value=1)
         st.markdown("Noter gerne hvor langt du når til næste gang. Appen kan desværre ikke huske det.")
         started = st.form_submit_button("OK, jeg er klar.")
 
@@ -66,21 +66,48 @@ def evaluate_case():
         aktivitet = evalueringsdata["aktivitet"].iloc[case - 1]
         model_suggestion = ast.literal_eval(evalueringsdata["brancheforslag med titler"].iloc[case - 1])
     
-        st.markdown(f"## Aktivitetsbeskrivelse {case}:")
+        st.markdown(f"#### {case}:")
         st.markdown(f"### {aktivitet}")
 
+        # ---- Custom CSS ----
+        # Bold koder: Måske man kan bruge noget format_func: https://discuss.streamlit.io/t/format-func-function-examples-please/11295
+        st.markdown("""
+            <style>
+                /* multiselect container */
+                div[data-baseweb="select"] > div {
+                    width: 780px !important;
+                    max-height: 1600px !important;
+                    overflow: auto;
+                    padding-bottom: 40px !important;
+                }
+
+                /* items in multiselect container */
+                .stMultiSelect [data-baseweb=select] span{
+                    white-space: normal !important;  /* allows line breaks */
+                    min-width: 99%;
+                    max-width: 99%;
+                    height: 2.4em;
+                    font-size: 1rem;
+                    line-height: 1 !important;
+                    padding-right: 20px !important;
+                    padding-top: 2px !important;
+                    padding-bottom: 2px !important;
+                    background-color: white;
+                    color: black;
+                }
+            </style>
+            """, unsafe_allow_html=True)
+
+        # ---- Custom CSS end ----
+
         user_selection = st.multiselect(
-            "Hvilke(n) branchekode(r) passer?",
+            "Hvilke(n) branchekode(r) passer? Med menuen rullet ned, kan man skrive for at filtrere. Prøv `10 fisk`.",
             codes_with_titles,
            default=model_suggestion,
         )
-        st.write("Valgt(e):", user_selection)
-    
-        st.markdown("Du kan tilføje flere. Hvis du er tilfreds kan du gemme og forsætte. Eller du kan springe denne over og forsætte til næste.")
 
         with st.form("Gem?"):
             saved = st.form_submit_button("Gem og gå til næste")
-            skipped = st.form_submit_button("Gem ikke og gå til næste")
 
         if saved:
             now = datetime.datetime.now().strftime('%Y-%m-%dT%H-%M-%S')
@@ -95,23 +122,7 @@ def evaluate_case():
                 f.write(user_selection_csv)        
             st.session_state.case += 1
             st.write("Gemt! Vi er videre!")
-            st.rerun(scope="fragment")
-            
-        elif skipped:
-            now = datetime.datetime.now().strftime('%Y-%m-%dT%H-%M-%S')
-            user_selection_gcs_path = f"branchekode-selector-bucket/user_responses/{name}_{case}_{now}.csv"
-            user_selection_df = pd.DataFrame({
-                'case': [case],
-                'user_selection': ['skipped'],
-                'model_suggetion': [model_suggestion]
-                })
-            user_selection_csv = user_selection_df.to_csv(index=False).encode("utf-8")
-            with conn.open(user_selection_gcs_path, mode="wb") as f:
-                f.write(user_selection_csv)        
-            st.write("Gemt! vi er videre!")
-            st.session_state.case += 1
-            st.rerun(scope="fragment")
-            
+            st.rerun(scope="fragment")                        
     return
 
 evaluate_case()
