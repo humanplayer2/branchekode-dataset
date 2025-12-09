@@ -77,6 +77,7 @@ def evaluate_case():
                     width: 780px !important;
                     max-height: 1600px !important;
                     overflow: auto;
+                    padding-bottom: 200px !important;
                 }
 
                 /* items in multiselect container */
