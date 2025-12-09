@@ -83,8 +83,7 @@ def evaluate_case():
                     min-width: 95%;
                     max-width: 95%;
                     height: 3.2em;
-                    font-size: 1rem;                    
-                    align-items: center !important; 
+                    font-size: 1rem;
                 }
             </style>
             """, unsafe_allow_html=True)
