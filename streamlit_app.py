@@ -82,7 +82,8 @@ def evaluate_case():
                     white-space: normal !important;  /* allows line breaks */
                     min-width: 900px;
                     max-width: 900px;
-                    height: 2.2em;
+                    min-height: 1em;
+                    max-height: 3em;
                     font-size: 1rem;
                 }
             </style>
