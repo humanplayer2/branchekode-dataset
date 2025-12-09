@@ -1,4 +1,7 @@
 [theme]
 base="light"
-primaryColor="yellowGreen"
-textColor = "black"
+backgroundColor="white"
+secondaryBackgroundColor="lavender"
+codeBackgroundColor="powderBlue"
+textColor="black"
+baseRadius="full"
