@@ -32,11 +32,19 @@ with st.expander("Vis instruktioner og startvalg", expanded=st.session_state.exp
 ### Opgaven
 Der vises en nummereret aktivitetsbeskrivelse samt en række forslag.  
 
-Under er et felt til at vælge branchekoder.   
-- Feltet indeholder forslag: Fjern de irrelevante på deres kryds.
-- Feltet er både en (meget lang) drop-down menu, men også et *tekstsøgefelt*.
-- Prøv at rulle menuen ned og indtast f.eks. `10 fisk`. :fish:
+For hver skal udføres to skridt:                
 
+#### Skridt A: Vælg relevant(e) branchekode(r)    
+Feltet under beskrivelsen er til at vælge branchekoder. 
+- Det indeholder forslag: Fjern de irrelevante på deres kryds.
+- Det er både en (meget lang) drop-down menu, men også et *tekstsøgefelt*.
+- Tryk under forslagene og skriv f.eks. `10 fisk`. :fish:
+
+#### Skridt B: Sortér branchekoder efter relevans.
+Feltet i skridt B indeholder hvad der pt. er valgt i skridt A.
+- Branchekoderne kan her trækkes op og ned (beklager at man ikke kan i skridt A).
+- Træk koderne så de står ordnet efter relevans, med de mest relevante først.
+                
 Når du er tilfreds, så `Gem og gå til næste`.
                 
 ### Kom i gang
@@ -139,7 +147,7 @@ def evaluate_case():
         # ---- Custom CSS end ----
         
         
-        st.markdown("#### A. Vælg branchekode(r)")
+        st.markdown("#### Skridt A. Vælg branchekode(r)")
         st.write("Tilføj/fjern. Skriv nederst for at filtrere. Prøv `10 fisk`.")
 
         user_selection = st.multiselect(
@@ -148,7 +156,7 @@ def evaluate_case():
            default=model_suggestion,
         )
         
-        st.markdown("#### B. Sortér branchekoder")
+        st.markdown("#### Skridt B. Sortér branchekoder")
         st.write("Træk for at sortere: mest passende i top, mindst passende i bund.")
         user_sorting = sort_items(user_selection, custom_style=custom_style)
 
