@@ -2,6 +2,7 @@ import ast
 import datetime
 import pandas as pd
 import streamlit as st
+from streamlit_sortables import sort_items
 from st_files_connection import FilesConnection
 
 # forbind til google cloud storage og hent branchekoder25 og evalueringsdata
@@ -19,6 +20,8 @@ if "started" not in st.session_state:
     st.session_state.started = False # vis først evalueringsform efter "login"
 if "expander_expanded" not in st.session_state:
     st.session_state.expander_expanded = True # vis instruktioner fra start
+
+st.set_page_config(layout="wide")
 
 # titel
 st.markdown("# :sparkles::sparkles: Gyldne Branchekoder :sparkles::sparkles:")
@@ -47,7 +50,7 @@ Notér nummeret over aktivitetsbeskrivelsen så du kan forsætte derfra næste g
     with st.form("user_info"):
         name = st.text_input("Bruger ID")
         start = st.number_input(f"Start ved aktivitetsbeskrivelse (1 -- {len(evalueringsdata)}):", min_value=1, max_value=5648, value=1)
-        st.markdown("Noter gerne hvor langt du når til næste gang. Appen kan desværre ikke huske det.")
+        st.markdown("Notér gerne hvor langt du når til næste gang. Appen kan desværre ikke huske det.")
         started = st.form_submit_button("OK, jeg er klar.")
 
 # opdater session state efter knap-tryk:
@@ -56,6 +59,41 @@ if started:
     st.session_state.case = start # sæt første evaluering til brugervalg
     st.session_state.expander_expanded = False # skjul instruktioner
     st.rerun() # for at skjule expander ved knap-tryk
+
+custom_style = """
+.sortable-component {
+    border: 1px solid white;
+    background-color: white;
+    border-radius: 20px;
+    padding: 4px;
+    width: 780px;
+}
+.sortable-container {
+    background-color: white;
+    counter-reset: item;
+    width: 780px;
+}
+.sortable-container-header {
+    background-color: red;
+    padding-left: 1rem;
+}
+.sortable-container-body {
+    background-color: lavender;
+    border-radius: 20px;
+    padding: 10px;
+    min-width: 780px;
+    max-width: 780px;
+}
+.sortable-item, .sortable-item:hover {
+    background-color: white;
+    font-weight: normal;
+    font-size: 0.95rem;
+    color: black;
+    width: 740px;
+    height: 2.4em;
+    text-align: start;
+}
+"""
 
 # Evaluation loop. Genkører ved knap-tryk.
 @st.fragment
@@ -99,27 +137,35 @@ def evaluate_case():
             """, unsafe_allow_html=True)
 
         # ---- Custom CSS end ----
+        
+        
+        st.markdown("#### A. Vælg branchekode(r)")
+        st.write("Tilføj/fjern. Skriv nederst for at filtrere. Prøv `10 fisk`.")
 
         user_selection = st.multiselect(
-            "Hvilke(n) branchekode(r) passer? Med menuen rullet ned, kan man skrive for at filtrere. Prøv `10 fisk`.",
+            "",
             codes_with_titles,
            default=model_suggestion,
         )
+        
+        st.markdown("#### B. Sortér branchekoder")
+        st.write("Træk for at sortere: mest passende i top, mindst passende i bund.")
+        user_sorting = sort_items(user_selection, custom_style=custom_style)
 
         with st.form("Gem?"):
             saved = st.form_submit_button("Gem og gå til næste")
 
         if saved:
             now = datetime.datetime.now().strftime('%Y-%m-%dT%H-%M-%S')
-            user_selection_gcs_path = f"branchekode-selector-bucket/user_responses/{name}_{case}_{now}.csv"
-            user_selection_df = pd.DataFrame({
+            user_response_gcs_path = f"branchekode-selector-bucket/user_responses/{name}_{case}_{now}.csv"
+            user_response_df = pd.DataFrame({
                 'case': [case],
-                'user_selection': [user_selection],
+                'user_response': [user_sorting],
                 'model_suggetion': [model_suggestion]
                 })
-            user_selection_csv = user_selection_df.to_csv(index=False).encode("utf-8")
-            with conn.open(user_selection_gcs_path, mode="wb") as f:
-                f.write(user_selection_csv)        
+            user_response_csv = user_response_df.to_csv(index=False).encode("utf-8")
+            with conn.open(user_response_gcs_path, mode="wb") as f:
+                f.write(user_response_csv)        
             st.session_state.case += 1
             st.write("Gemt! Vi er videre!")
             st.rerun(scope="fragment")                        
