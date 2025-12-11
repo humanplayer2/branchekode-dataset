@@ -158,6 +158,7 @@ def evaluate_case():
         
         st.markdown("#### Skridt B. Sortér branchekoder")
         st.write("Træk for at sortere: mest passende i top, mindst passende i bund.")
+        
         user_sorting = sort_items(user_selection, custom_style=custom_style)
 
         with st.form("Gem?"):
