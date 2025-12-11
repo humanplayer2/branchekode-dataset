@@ -35,14 +35,13 @@ Der vises en nummereret aktivitetsbeskrivelse samt en række forslag.
 For hver skal udføres to skridt:                
 
 #### Skridt A: Vælg relevant(e) branchekode(r)    
-Feltet under beskrivelsen er til at vælge branchekoder. 
+Feltet under beskrivelsen er til at vælge branchekoder.
 - Det indeholder forslag: Fjern de irrelevante på deres kryds.
-- Det er både en (meget lang) drop-down menu, men også et *tekstsøgefelt*.
-- Tryk under forslagene og skriv f.eks. `10 fisk`. :fish:
+- Tilføj relevante koder. Feltet er både en (meget lang) drop-down menu, og et *søgefelt* i koder og titler: Tryk under forslagene og skriv f.eks. `10 fisk`. :fish:
 
-#### Skridt B: Sortér branchekoder efter relevans.
+#### Skridt B: Sortér branchekoder efter relevans
 Feltet i skridt B indeholder hvad der pt. er valgt i skridt A.
-- Branchekoderne kan her trækkes op og ned (beklager at man ikke kan i skridt A).
+- Branchekoderne kan her trækkes op og ned (beklager at man ikke kan det i skridt A).
 - Træk koderne så de står ordnet efter relevans, med de mest relevante først.
                 
 Når du er tilfreds, så `Gem og gå til næste`.
