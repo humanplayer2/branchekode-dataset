@@ -1,6 +1,6 @@
 # branchekode-dataset
 
-:sparkles::sparkles: <a href=" https://branchekode-dataset.streamlit.app/" target="_blank">Open deployed Streamlit</a> :sparkles::sparkles:
+:sparkles::sparkles: [Open deployed Streamlit](https://branchekode-dataset.streamlit.app/) :sparkles::sparkles:
 
 
 To run locally
