@@ -1,6 +1,6 @@
 [project]
 authors = [{name = "rasren", email = "rasren@erst.com"}]
-name = "branchekode_selector"
+name = "branchekode-dataset"
 requires-python = ">= 3.11"
 version = "0.1.0"
 dependencies = [ "ipykernel>=7.1.0,<8", "datetime>=6.0,<7", "streamlit>=1.52.1,<2", "pandas>=2.3.3,<3", "gcsfs>=2025.12.0,<2026", "st-files-connection>=0.1.0,<0.2", "streamlit-sortables>=0.3.1,<0.4"]
@@ -10,6 +10,6 @@ channels = ["conda-forge"]
 platforms = ["linux-64"]
 
 [tool.pixi.pypi-dependencies]
-branchekode_selector = { path = ".", editable = true }
+branchekode-dataset = { path = ".", editable = true }
 
 [tool.pixi.tasks]

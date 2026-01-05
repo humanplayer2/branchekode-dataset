@@ -1,6 +1,8 @@
 import pandas as pd
 
-evalueringsdata = pd.read_csv("data_local/evalueringsdata.csv")
+load_file = "data_local/evalueringsdata_v2.csv"
+save_file = load_file.replace('.csv', '_med_titler.csv')
+evalueringsdata = pd.read_csv(load_file)
 db25_struktur = pd.read_csv("data_local/db25_struktur.csv")
 
 # Map branchekode til branchekode: titel
@@ -36,7 +38,6 @@ unknown_count = evalueringsdata["brancheforslag med titler"].apply(
 ).sum()
 print(f"In evalueringsdata_med_titler er der {unknown_count} 'Unknown' .")
 
-save_file = "data_local/evalueringsdata_med_titler.csv"
 evalueringsdata.to_csv(save_file, index=False)
 
 print(f"Evalueringsdata med titler gemt til {save_file}.")

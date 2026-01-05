@@ -8,7 +8,7 @@ from st_files_connection import FilesConnection
 # forbind til google cloud storage og hent branchekoder25 og evalueringsdata
 conn = st.connection('gcs', type=FilesConnection)
 db25_struktur = conn.read("branchekode-selector-bucket/data_static/db25_struktur.csv", input_format="csv")
-evalueringsdata = conn.read("branchekode-selector-bucket/data_static/evalueringsdata_med_titler.csv", input_format="csv")
+evalueringsdata = conn.read("branchekode-selector-bucket/data_static/evalueringsdata_v2_med_titler.csv", input_format="csv")
 
 # valgmuligheder under evaluering:
 codes_with_titles = (db25_struktur["kode"] + ": " + db25_struktur["titel"]).tolist()
