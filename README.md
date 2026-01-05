@@ -1,6 +1,7 @@
 # branchekode-dataset
 
-Deployed Streamlit: https://branchekode-dataset.streamlit.app/
+:sparkles::sparkles: <a href=" https://branchekode-dataset.streamlit.app/" target="_blank">Open deployed Streamlit</a> :sparkles::sparkles:
+
 
 To run locally
 - Fill in `.streamlit/secrets.toml` according to its `.dist`. [Streamlit docs](https://docs.streamlit.io/develop/tutorials/databases/gcs).
