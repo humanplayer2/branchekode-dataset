@@ -32,7 +32,9 @@ with st.expander("Vis instruktioner og startvalg", expanded=st.session_state.exp
 ### Opgaven
 Der vises en nummereret aktivitetsbeskrivelse samt en række forslag.  
 
-For hver skal udføres to skridt:                
+Er aktivitetsbeskrivelsen for vag kan den springes over med "For vag"-knappen.
+                
+Ellers skal der udføres to skridt:
 
 #### Skridt A: Vælg relevant(e) branchekode(r)    
 Feltet under beskrivelsen er til at vælge branchekoder.
@@ -114,6 +116,24 @@ def evaluate_case():
         st.markdown(f"#### {case}:")
         st.markdown(f"### {aktivitet}")
 
+        too_vague = st.button("For vag", type="secondary")
+        if too_vague:
+            st.write("OK, vi går videre :hand_over_mouth:")
+            now = datetime.datetime.now().strftime('%Y-%m-%dT%H-%M-%S')
+            user_response_gcs_path = f"branchekode-selector-bucket/user_responses/{name}_{case}_{now}.csv"
+            user_response_df = pd.DataFrame({
+                'case': [case],
+                'text': [aktivitet],
+                'user_response': ["vague"],
+                'model_suggestion': [model_suggestion]
+                })
+            user_response_csv = user_response_df.to_csv(index=False).encode("utf-8")
+            with conn.open(user_response_gcs_path, mode="wb") as f:
+                f.write(user_response_csv)        
+            st.session_state.case += 1
+            st.write("Gemt! Vi er videre!")
+            st.rerun(scope="fragment")                               
+
         # ---- Custom CSS ----
         # Bold koder: Måske man kan bruge noget format_func: https://discuss.streamlit.io/t/format-func-function-examples-please/11295
         st.markdown("""
@@ -145,22 +165,21 @@ def evaluate_case():
 
         # ---- Custom CSS end ----
         
-        
-        st.markdown("#### Skridt A. Vælg branchekode(r)")
-        st.write("Tilføj/fjern. Skriv nederst for at filtrere. Prøv `10 fisk`.")
-
-        user_selection = st.multiselect(
-            "",
-            codes_with_titles,
-           default=model_suggestion,
-        )
-        
-        st.markdown("#### Skridt B. Sortér branchekoder")
-        st.write("Træk for at sortere: mest passende i top, mindst passende i bund.")
-        
-        user_sorting = sort_items(user_selection, custom_style=custom_style)
-
         with st.form("Gem?"):
+            st.markdown("#### Skridt A. Vælg branchekode(r)")
+            st.write("Tilføj/fjern. Skriv nederst for at filtrere. Prøv `10 fisk`.")
+
+            user_selection = st.multiselect(
+                "",
+                codes_with_titles,
+            default=model_suggestion,
+            )
+            
+            st.markdown("#### Skridt B. Sortér branchekoder")
+            st.write("Træk for at sortere: mest passende i top, mindst passende i bund.")
+            
+            user_sorting = sort_items(user_selection, custom_style=custom_style)
+            
             saved = st.form_submit_button("Gem og gå til næste")
 
         if saved:
@@ -168,8 +187,9 @@ def evaluate_case():
             user_response_gcs_path = f"branchekode-selector-bucket/user_responses/{name}_{case}_{now}.csv"
             user_response_df = pd.DataFrame({
                 'case': [case],
+                'text': [aktivitet],
                 'user_response': [user_sorting],
-                'model_suggetion': [model_suggestion]
+                'model_suggestion': [model_suggestion]
                 })
             user_response_csv = user_response_df.to_csv(index=False).encode("utf-8")
             with conn.open(user_response_gcs_path, mode="wb") as f:
