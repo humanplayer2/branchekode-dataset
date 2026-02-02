@@ -32,7 +32,9 @@ with st.expander("Vis instruktioner og startvalg", expanded=st.session_state.exp
 ### Opgaven
 Der vises en nummereret aktivitetsbeskrivelse samt en række forslag.  
 
-For hver skal udføres to skridt:                
+Er aktivitetsbeskrivelsen for vag kan den springes over med "For vag"-knappen.
+                
+Ellers skal der udføres to skridt:
 
 #### Skridt A: Vælg relevant(e) branchekode(r)    
 Feltet under beskrivelsen er til at vælge branchekoder.
