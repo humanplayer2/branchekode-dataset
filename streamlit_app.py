@@ -58,9 +58,7 @@ Notér nummeret over aktivitetsbeskrivelsen så du kan forsætte derfra næste g
         name = st.text_input("Bruger ID")
         start = st.number_input(f"Start ved aktivitetsbeskrivelse (1 -- {len(evalueringsdata)}):", min_value=1, max_value=5648, value=1)
         st.markdown("Notér gerne hvor langt du når til næste gang. Appen kan desværre ikke huske det.")
-        col1, col2 = st.columns([0.8, 0.2])
-        with col2:
-            started = st.form_submit_button("OK, jeg er klar.")
+        started = st.form_submit_button("OK, jeg er klar.")
 
 # opdater session state efter knap-tryk:
 if started:
@@ -116,14 +114,9 @@ def evaluate_case():
         st.markdown(f"#### {case}:")
         st.markdown(f"### {aktivitet}")
 
-        
-        col1, col2 = st.columns([0.8, 0.2])
-        with col2:
-            too_vague = st.button("For vag", type="secondary")
-            if too_vague:
-                st.write("OK, vi går videre :hand_over_mouth:")
-
+        too_vague = st.button("For vag", type="secondary")
         if too_vague:
+            st.write("OK, vi går videre :hand_over_mouth:")
             now = datetime.datetime.now().strftime('%Y-%m-%dT%H-%M-%S')
             user_response_gcs_path = f"branchekode-selector-bucket/user_responses/{name}_{case}_{now}.csv"
             user_response_df = pd.DataFrame({
@@ -185,9 +178,7 @@ def evaluate_case():
             
             user_sorting = sort_items(user_selection, custom_style=custom_style)
             
-            col1, col2 = st.columns([0.8, 0.2])
-            with col2:
-                saved = st.form_submit_button("Gem og gå til næste")
+            saved = st.form_submit_button("Gem og gå til næste")
 
         if saved:
             now = datetime.datetime.now().strftime('%Y-%m-%dT%H-%M-%S')
