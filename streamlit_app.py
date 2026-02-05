@@ -165,16 +165,17 @@ def evaluate_case():
 
         # ---- Custom CSS end ----
         
-        with st.form("Gem?"):
-            st.markdown("#### Skridt A. Vælg branchekode(r)")
-            st.write("Tilføj/fjern. Skriv nederst for at filtrere. Prøv `10 fisk`.")
+        st.markdown("#### Skridt A. Vælg branchekode(r)")
+        st.write("Tilføj/fjern. Skriv nederst for at filtrere. Prøv `10 fisk`.")
 
-            user_selection = st.multiselect(
-                "",
-                codes_with_titles,
-            default=model_suggestion,
-            )
+        user_selection = st.multiselect(
+            "",
+            codes_with_titles,
+        default=model_suggestion,
+        )
             
+        with st.form("Gem?"):
+
             st.markdown("#### Skridt B. Sortér branchekoder")
             st.write("Træk for at sortere: mest passende i top, mindst passende i bund.")
             
